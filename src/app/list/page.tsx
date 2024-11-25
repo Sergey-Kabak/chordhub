@@ -1,16 +1,24 @@
 'use client'
 
-import {useEffect} from "react";
+import { List } from './components/list.tsx';
+import {useEffect, useState} from "react";
 
-export default function List () {
+export default function ListPage () {
 
-    // useEffect(() => {
-    //
-    //     fetch('/api/songs')
-    //
-    // }, []);
+    const [list, setList] = useState<Record<string, string>[]>([])
+
+    console.log(list);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/api/songs', { method: 'GET' })
+            .then(res => res.json()
+                .then(({data}) => setList(data)));
+
+    }, []);
 
     return (
-        <>list</>
+        <div className={'grid p-4'}>
+            <List data={list} />
+        </div>
     )
 }

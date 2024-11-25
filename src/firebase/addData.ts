@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, setDoc, getDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc, getDocs } from "firebase/firestore";
 
 import { db } from './config.ts'
 
@@ -13,7 +13,11 @@ export const addSong = async (data) => {
 export const getList = async () => {
     const collectionRef = collection(db, "songs");
     return new Promise((resolve, reject) => {
-        getDoc(collectionRef)
-            .then(res => resolve(res))
+        getDocs(collectionRef)
+            .then(res => resolve(
+                res.docs.map((doc) => ({
+                    ...doc.data()
+                }))
+            ))
     });
 }

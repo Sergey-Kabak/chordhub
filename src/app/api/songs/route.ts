@@ -12,6 +12,6 @@ export async function POST(request: Request) {
     const song = await request.json()
 
     const result = await addSong(song)
-
-    return Response.json({ data: result })
+    console.log(result);
+    return Response.json({ data: null })
 }
