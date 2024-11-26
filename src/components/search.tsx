@@ -1,13 +1,12 @@
 'use client'
 
 import { useCallback } from 'react'
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { useForm, FormProvider } from "react-hook-form";
 import { Input, Button } from "@nextui-org/react";
 
 export const Search = () => {
     const router = useRouter()
-    const pathname = usePathname()
     const searchParams = useSearchParams()
 
     const createQueryString = useCallback(
@@ -32,7 +31,7 @@ export const Search = () => {
 
     return (
         <FormProvider {...form}>
-            <form onSubmit={handleSubmitForm} className={'flex pag-2 max-w-[640px] m-auto'}>
+            <form onSubmit={handleSubmitForm} className={'flex gap-2 max-w-[640px] m-auto'}>
                 <Input {...form.register('query')} />
                 <Button type={'submit'}>Search</Button>
             </form>

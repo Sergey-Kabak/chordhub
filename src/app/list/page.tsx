@@ -1,22 +1,19 @@
-'use client'
+'use server'
 
-import { List } from './components/list.tsx';
-import {useEffect, useState} from "react";
+import { List } from '@/components/list.tsx';
+import {currentDomain} from "@/app/utils/server";
 
-export default function ListPage () {
+export default async function ListPage () {
+    const domain = await currentDomain()
+    const data = await fetch(domain + '/api/songs', {
+        method: 'GET'
+    })
 
-    const [list, setList] = useState<Record<string, string>[]>([])
-
-    useEffect(() => {
-        fetch('http://localhost:3000/api/songs', { method: 'GET' })
-            .then(res => res.json()
-                .then(({data}) => setList(data)));
-
-    }, []);
+    const result = await data.json()
 
     return (
         <div className={'grid p-4'}>
-            <List data={list} />
+            <List data={result?.data || []} />
         </div>
     )
 }

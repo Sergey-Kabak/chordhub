@@ -1,21 +1,23 @@
-import { List } from '@/app/list/components/list.tsx'
+'use server'
+
+import { List } from '@/components/list.tsx'
+import {currentDomain} from "@/app/utils/server";
 
 
+export default async function SearchPage ({ searchParams }: { searchParams: Promise<never> }) {
+    const _searchParams = await searchParams
+    const domain = await currentDomain()
 
-export default async function SearchPage ({ searchParams }) {
-
-    const params = await searchParams
-
-    const data = await fetch('http://localhost:3000/api/search', {
+    const data = await fetch(domain + '/api/search', {
         method: 'POST',
-        body: JSON.stringify(params),
+        body: JSON.stringify(_searchParams),
     })
 
     const result = await data.json()
 
     return (
-        <div>
-            <List data={result?.data || []} />
+        <div className={'grid p-4'}>
+            <List data={result?.data || []}/>
         </div>
     )
 }

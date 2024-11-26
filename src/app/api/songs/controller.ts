@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, doc, getDocs, getDoc } from "firebase/firestore";
 
 import { db } from '@/firebase/config.ts'
 
@@ -16,8 +16,22 @@ export const getList = async () => {
         getDocs(collectionRef)
             .then(res => resolve(
                 res.docs.map((doc) => ({
-                    ...doc.data()
+                    ...doc.data(),
+                    id: doc.id,
                 }))
             ))
     });
+}
+
+export const getOne = async (id: string) => {
+    const docRef = doc(db, "songs", id);
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+        return {
+            ...docSnap.data(),
+            id: docSnap.id
+        }
+    }
+    return null
 }

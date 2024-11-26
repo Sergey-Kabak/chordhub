@@ -13,7 +13,7 @@ export const searchQuery = async (search: string) => {
         const querySnapshot = await getDocs(schema)
         const result: Record<string, string>[] = []
         querySnapshot.forEach((doc) => {
-            result.push(doc.data());
+            result.push({...doc.data(), id: doc.id });
         })
         resolve(result)
     })

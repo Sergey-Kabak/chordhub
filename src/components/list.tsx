@@ -1,15 +1,20 @@
 'use client'
 
 import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image}  from "@nextui-org/react";
+import NextLink from "next/link";
 
-export const List = ({ data }: { data : Record<string, any>}) => {
+type ListProps = {
+    data: Record<string, never>[]
+}
+
+export const List = ({ data }: ListProps) => {
 
 
     return data ? (
         <div className={'grid gap-2 max-w-[640px]'}>
             {
-                data.map((song, index) => (
-                    <Card key={index} className="max-w-[400px]">
+                data.map(song => (
+                    <Card key={song.id} className="max-w-[400px]">
                         <CardHeader className="flex gap-3">
                             <Image
                                 alt="nextui logo"
@@ -30,11 +35,11 @@ export const List = ({ data }: { data : Record<string, any>}) => {
                         <Divider/>
                         <CardFooter>
                             <Link
-                                isExternal
+                                as={NextLink}
                                 showAnchorIcon
-                                href="https://github.com/nextui-org/nextui"
+                                href={`/list/${song.id}`}
                             >
-                                Visit source code on GitHub.
+                                Check chord for this song
                             </Link>
                         </CardFooter>
                     </Card>
