@@ -7,8 +7,6 @@ export default function ListPage () {
 
     const [list, setList] = useState<Record<string, string>[]>([])
 
-    console.log(list);
-
     useEffect(() => {
         fetch('http://localhost:3000/api/songs', { method: 'GET' })
             .then(res => res.json()
