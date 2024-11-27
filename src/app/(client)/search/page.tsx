@@ -1,6 +1,6 @@
 'use server'
 
-import { List } from '@/components/list.tsx'
+import { List } from '../components/list.tsx'
 import {currentDomain} from "@/app/utils/server";
 
 

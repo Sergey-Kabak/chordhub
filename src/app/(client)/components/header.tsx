@@ -2,7 +2,7 @@
 
 import {Link, Navbar, NavbarBrand, NavbarContent, NavbarItem} from "@nextui-org/react";
 import NextLink from 'next/link'
-import {Search} from "@/components/search.tsx";
+import {Search} from "./search.tsx";
 import {usePathname} from "next/navigation";
 
 export const Header = () => {

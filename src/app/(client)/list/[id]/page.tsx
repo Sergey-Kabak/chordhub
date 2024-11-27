@@ -1,4 +1,6 @@
-import {List} from "@/components/list.tsx";
+'use server'
+
+import {List} from "../../components/list.tsx";
 import {currentDomain} from "@/app/utils/server";
 
 export default async function songPage ({ params } : { params: Record<string, unknown> }) {

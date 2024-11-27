@@ -8,8 +8,6 @@ type ListProps = {
 }
 
 export const List = ({ data }: ListProps) => {
-
-
     return data ? (
         <div className={'grid gap-2 max-w-[640px]'}>
             {

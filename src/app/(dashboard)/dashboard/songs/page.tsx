@@ -1,17 +1,15 @@
 'use client'
 
-import "./globals.css";
+import {FormProvider, useForm} from "react-hook-form";
+import {Button, Input, Textarea} from "@nextui-org/react";
 
-import { useForm, FormProvider } from "react-hook-form";
-import { Input, Textarea, Button } from "@nextui-org/react"
-
-export default function App() {
+export default function DashboardSongs () {
 
     const form = useForm({
         defaultValues: {
-          authorName: '',
-          songName: '',
-          content: ''
+            authorName: '',
+            songName: '',
+            content: ''
         },
         mode: 'onChange',
     });
@@ -24,8 +22,7 @@ export default function App() {
             .then(res => res.json().then(data => console.log(data)));
     })
 
-  return (
-    <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+    return (
         <FormProvider {...form}>
             <form onSubmit={handleFormSubmit} className={'grid gap-2 p-4'}>
                 <Input type="text" {...form.register('authorName')} placeholder="Author" />
@@ -34,7 +31,5 @@ export default function App() {
                 <Button type="submit">Submit</Button>
             </form>
         </FormProvider>
-    </div>
-
-  );
+    )
 }
