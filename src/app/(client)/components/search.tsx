@@ -31,7 +31,7 @@ export const Search = () => {
 
     return (
         <FormProvider {...form}>
-            <form onSubmit={handleSubmitForm} className={'flex gap-2 max-w-[640px] m-auto'}>
+            <form onSubmit={handleSubmitForm} className={'flex gap-2 max-w-[640px]'}>
                 <Input {...form.register('query')} />
                 <Button type={'submit'}>Search</Button>
             </form>
