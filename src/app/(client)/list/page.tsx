@@ -12,8 +12,8 @@ export default async function ListPage () {
     const result = await data.json()
 
     return (
-        <div className={'grid p-4'}>
-            <List data={result?.data || []} />
-        </div>
+      <div className={'grid p-4'}>
+        <List data={result?.data || []}/>
+      </div>
     )
 }

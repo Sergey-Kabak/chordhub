@@ -1,4 +1,4 @@
-import { getOne, updateOne } from "../controller.ts";
+import { getOne } from "../controller.ts";
 import {NextRequest} from "next/server";
 
 export async function GET(req: NextRequest) {

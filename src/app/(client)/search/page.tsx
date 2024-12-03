@@ -3,8 +3,7 @@
 import { List } from '../components/list.tsx'
 import {currentDomain} from "@/app/utils/server";
 
-
-export default async function SearchPage ({ searchParams }: { searchParams: Promise<never> }) {
+export default async function SearchPage ({ searchParams }: { searchParams: Promise<unknown> }) {
     const _searchParams = await searchParams
     const domain = await currentDomain()
 
@@ -16,8 +15,8 @@ export default async function SearchPage ({ searchParams }: { searchParams: Prom
     const result = await data.json()
 
     return (
-        <div className={'grid p-4'}>
-            <List data={result?.data || []}/>
-        </div>
+      <div className={'grid p-4'}>
+        <List data={result?.data || []}/>
+      </div>
     )
 }

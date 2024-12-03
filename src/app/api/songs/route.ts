@@ -1,5 +1,4 @@
 import { getList, addSong, updateOne } from "./controller.ts";
-import { NextRequest } from "next/server";
 
 export async function GET() {
 

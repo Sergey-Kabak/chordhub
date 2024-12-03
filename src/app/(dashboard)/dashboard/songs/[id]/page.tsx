@@ -3,7 +3,7 @@
 import { currentDomain } from "@/app/utils/server";
 import { SongEdit } from "@/app/(dashboard)/dashboard/songs/[id]/components/song-edit.tsx";
 
-export default async function dashboardSongPage ({ params } : { params: Record<string, unknown> }) {
+export default async function dashboardSongPage ({ params } : { params: Promise<{ id: string }> }) {
 
   const domain = await currentDomain()
 

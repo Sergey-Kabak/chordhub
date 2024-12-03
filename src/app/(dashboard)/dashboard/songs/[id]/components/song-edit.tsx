@@ -6,11 +6,10 @@ import { Button } from "@nextui-org/react";
 import dynamic from "next/dynamic";
 
 import { FormInput } from "@/components/form/form-input";
-import { PUT } from "@/app/api/songs/route.ts";
 
 const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false }) ;
 
-export const SongEdit = ({ data }: { data: Record<any, any>} ) => {
+export const SongEdit = ({ data }: { data: Record<string, string>} ) => {
   const editor = useRef(null);
   const [content, setContent] = useState(data.content);
 
@@ -46,9 +45,6 @@ export const SongEdit = ({ data }: { data: Record<any, any>} ) => {
         name
         <FormInput name={'name'}/>
 
-        {/*performer*/}
-        {data?.performer?.name}
-
         <br/>
 
         album
@@ -59,7 +55,6 @@ export const SongEdit = ({ data }: { data: Record<any, any>} ) => {
           ref={editor}
           value={content}
           config={config}
-          tabIndex={1} // tabIndex of textarea
           onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
           onChange={handleTextEditor}
         />
