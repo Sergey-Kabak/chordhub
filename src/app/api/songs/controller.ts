@@ -1,4 +1,7 @@
-import { collection, addDoc, doc, getDocs, getDoc } from "firebase/firestore";
+'use server'
+
+import { collection, addDoc, doc, getDocs, getDoc, updateDoc } from "firebase/firestore";
+import { omit } from "lodash";
 
 import { db } from '@/firebase/config.ts'
 
@@ -26,12 +29,29 @@ export const getList = async () => {
 export const getOne = async (id: string) => {
     const docRef = doc(db, "songs", id);
     const docSnap = await getDoc(docRef)
-
+    const performer = await getDoc(docSnap.data()?.performer)
     if (docSnap.exists()) {
         return {
             ...docSnap.data(),
+            performer: performer.data(),
             id: docSnap.id
         }
     }
-    return null
+    return {}
+}
+
+export const updateOne = async (id: string, data: Record<string, string>) => {
+    const docRef = doc(db, "songs", id);
+    await updateDoc(docRef, omit(data, 'id'))
+    const docSnap = await getDoc(docRef)
+    const performer = await getDoc(docSnap.data()?.performer)
+    if (docSnap.exists()) {
+        return {
+            ...docSnap.data(),
+            performer: performer.data(),
+            id: docSnap.id
+        }
+    }
+    return {}
+
 }

@@ -1,5 +1,7 @@
-export default function DashboardPage () {
+'use server'
+
+export default async function DashboardPage () {
     return (
-        <>dashboard</>
+        <div>dashboard</div>
     )
 }

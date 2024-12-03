@@ -1,7 +1,7 @@
-import {getOne} from "../controller.ts";
+import { getOne, updateOne } from "../controller.ts";
 import {NextRequest} from "next/server";
 
-export async function GET(req: NextRequest, res: Response) {
+export async function GET(req: NextRequest) {
     const id = req.url.match(/\w+$/)?.[0]
     const song = await getOne(id as string)
 

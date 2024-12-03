@@ -1,9 +1,10 @@
+import { ReactNode } from 'react'
 import {Navigation} from "@/app/(dashboard)/components/navigation.tsx";
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <div className={'grid grid-cols-[200px_1fr] min-h-screen'}>
