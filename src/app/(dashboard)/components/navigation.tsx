@@ -21,6 +21,10 @@ export const Navigation = () => {
             path: 'songs',
             label: 'songs'
         },
+        {
+            path: 'import',
+            label: 'import'
+        },
 
     ]
     return (
