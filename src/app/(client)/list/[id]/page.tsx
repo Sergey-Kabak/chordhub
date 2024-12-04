@@ -1,6 +1,7 @@
 'use server'
 
 import {currentDomain} from "@/app/utils/server";
+import { Tonalities } from "@/app/(client)/list/[id]/components/tonalities.tsx";
 
 export default async function songPage ({ params } : { params: Promise<{ id: string }> }) {
     const domain = await currentDomain()
@@ -16,9 +17,7 @@ export default async function songPage ({ params } : { params: Promise<{ id: str
 
     return (
       <div className={'grid p-4'}>
-          <div className={'max-w-[640px] w-full m-auto'}>
-              <div dangerouslySetInnerHTML={{__html: result?.data?.content}}></div>
-          </div>
+          <Tonalities list={result.data.tonalities} />
       </div>
     )
 }

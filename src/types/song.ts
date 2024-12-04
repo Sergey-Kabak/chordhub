@@ -1,9 +1,10 @@
+import { PerformerType } from "@/types/performer.ts";
+
 export type SongType = {
+    id: string,
     name: string,
-    albumId: string,
-    performerId: string,
+    album: string,
+    performer: PerformerType,
     tonalities: string[],
     categories: string[],
-    links: string[],
-    youtube: string,
 }

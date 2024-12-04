@@ -7,7 +7,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <div className={'grid grid-cols-[200px_1fr] min-h-screen'}>
+    <div className={'grid grid-cols-[200px_1fr] max-w-screen min-h-screen'}>
       <Navigation/>
       <div className={'p-4'}>
         {children}

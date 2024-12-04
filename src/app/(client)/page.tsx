@@ -43,30 +43,28 @@ export default function App() {
       className="py-4 grid w-full h-auto items-center justify-center">
       <div className={'max-w-[1024px] px-6'}>
         <h1 className={'mb-4'}>Categories</h1>
-        <div className="mb-4 gap-2 grid grid-cols-6">
-          <Suspense>
-            <div>
-              {list.map((item, index) => (
-                <Card shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")}>
-                  <CardBody className="overflow-visible p-0">
-                    <Image
-                      shadow="sm"
-                      radius="lg"
-                      width="100%"
-                      alt={item.title}
-                      className="w-full object-cover h-[140px]"
-                      src={item.img}
-                    />
-                  </CardBody>
-                  <CardFooter className="text-small justify-between">
-                    <b>{item.title}</b>
-                    <p className="text-default-500">{item.price}</p>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </Suspense>
-        </div>
+        <Suspense>
+          <div className="mb-4 gap-2 grid grid-cols-6">
+            {list.map((item, index) => (
+              <Card shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")}>
+                <CardBody className="overflow-visible p-0">
+                  <Image
+                    shadow="sm"
+                    radius="lg"
+                    width="100%"
+                    alt={item.title}
+                    className="w-full object-cover h-[140px]"
+                    src={item.img}
+                  />
+                </CardBody>
+                <CardFooter className="text-small justify-between">
+                  <b>{item.title}</b>
+                  <p className="text-default-500">{item.price}</p>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </Suspense>
       </div>
     </div>
   );

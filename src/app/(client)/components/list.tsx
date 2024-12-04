@@ -2,9 +2,10 @@
 
 import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image}  from "@nextui-org/react";
 import NextLink from "next/link";
+import { SongType } from "@/types/song.ts";
 
 type ListProps = {
-    data: Record<string, never>[]
+    data: SongType[],
 }
 
 export const List = ({ data }: ListProps) => {
@@ -22,22 +23,28 @@ export const List = ({ data }: ListProps) => {
                 width={40}
               />
               <div className="flex flex-col">
-                <p className="text-md">{song.authorName}</p>
-                <p className="text-small text-default-500">{song.songName}</p>
+                <p className="text-md">{song.name}</p>
+                <p className="text-small text-default-500">{song.performer.name}</p>
               </div>
             </CardHeader>
             <Divider/>
             <CardBody>
-              <p>{song.content}</p>
+              {/*<p>{song.tonalities}</p>*/}
             </CardBody>
             <Divider/>
             <CardFooter>
               <Link
                 as={NextLink}
-                showAnchorIcon
                 href={`/list/${song.id}`}
               >
-                Check chord for this song
+                client
+              </Link>
+              <Divider orientation={'vertical'} className={'mx-4'} />
+              <Link
+                as={NextLink}
+                href={`/dashboard/songs/${song.id}`}
+              >
+                edit
               </Link>
             </CardFooter>
           </Card>

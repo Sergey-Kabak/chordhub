@@ -2,18 +2,18 @@
 
 import React, { useState, useRef, useMemo } from 'react';
 import { useForm, FormProvider } from "react-hook-form";
-import { Button } from "@nextui-org/react";
+import { Button, Pagination, Divider } from "@nextui-org/react";
 import dynamic from "next/dynamic";
 
 import { FormInput } from "@/components/form/form-input";
+import { SongType } from "@/types/song.ts";
 
 const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false }) ;
 
-export const SongEdit = ({ data }: { data: Record<string, string>} ) => {
+export const SongEdit = ({ data }: { data: SongType} ) => {
   const editor = useRef(null);
-  const [content, setContent] = useState(data.content);
-
-  console.log(data);
+  const [content, setContent] = useState(data.tonalities);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const config = useMemo(() => ({
       readonly: false, // all options from https://xdsoft.net/jodit/docs/,
@@ -28,7 +28,9 @@ export const SongEdit = ({ data }: { data: Record<string, string>} ) => {
   });
 
   const handleTextEditor = (value: string) => {
-    form.setValue('content', value);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    form.setValue(`tonalities.[${currentPage - 1}]`, value);
   }
 
   const handeFormSubmit = form.handleSubmit((values) => {
@@ -42,22 +44,48 @@ export const SongEdit = ({ data }: { data: Record<string, string>} ) => {
   return (
     <FormProvider {...form}>
       <form onSubmit={handeFormSubmit}>
-        name
-        <FormInput name={'name'}/>
+        <div className={'grid grid-cols-3 gap-2'}>
+          <div>
+            name
+            <FormInput name={'name'}/>
+          </div>
 
-        <br/>
+          <div>
+            performer
+            <FormInput name={'performer.name'} isDisabled/>
+          </div>
 
-        album
-        <FormInput name={'album'}/>
+          <div>
+            album
+            <FormInput name={'album'} />
+          </div>
+        </div>
 
-        content
+
+        <Divider className="my-4" />
+        tonalities:
+        <Pagination
+          key={'flat'}
+          total={data.tonalities.length}
+          variant={'flat'}
+          page={currentPage}
+          onChange={setCurrentPage}
+        />
+
+        <Divider className="my-4" />
+
         <JoditEditor
+          className={'grid'}
           ref={editor}
-          value={content}
+          value={content[currentPage - 1]}
           config={config}
-          onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+          onBlur={newContent => setContent((prev) => {
+            prev[currentPage - 1] = newContent
+            return prev
+          })} // preferred to use only this option to update the content for performance reasons
           onChange={handleTextEditor}
         />
+        <Divider className="my-4" />
         <Button type={'submit'}>Submit</Button>
       </form>
     </FormProvider>
