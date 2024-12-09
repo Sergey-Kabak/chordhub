@@ -17,7 +17,7 @@ export default async function songPage ({ params } : { params: Promise<{ id: str
 
     return (
       <div className={'grid p-4'}>
-          <Tonalities list={result.data.tonalities} />
+          <Tonalities content={result.data.content} />
       </div>
     )
 }
