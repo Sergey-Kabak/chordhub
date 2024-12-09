@@ -899,10 +899,6 @@ video {
   margin-top: 0.5rem;
 }
 
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .box-border {
   box-sizing: border-box;
 }
@@ -1028,10 +1024,6 @@ video {
 
 .h-\[100dvh\] {
   height: 100dvh;
-}
-
-.h-\[140px\] {
-  height: 140px;
 }
 
 .h-\[2px\] {
@@ -1643,6 +1635,10 @@ video {
           appearance: none;
 }
 
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -1651,32 +1647,12 @@ video {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.grid-cols-6 {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
 .grid-cols-\[200px_1fr\] {
   grid-template-columns: 200px 1fr;
 }
 
-.grid-cols-\[5_260px\] {
-  grid-template-columns: 5 260px;
-}
-
-.grid-cols-\[5\2c 260px\] {
-  grid-template-columns: 5 260px;
-}
-
 .grid-cols-\[repeat\(5\2c 260px\)\] {
   grid-template-columns: repeat(5,260px);
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -2656,6 +2632,11 @@ video {
   line-height: var(--nextui-line-height-medium);
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .text-small {
   font-size: var(--nextui-font-size-small);
   line-height: var(--nextui-line-height-small);
@@ -2674,11 +2655,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .font-bold {
@@ -7807,10 +7783,6 @@ body {
   .sm\:my-16 {
     margin-top: 4rem;
     margin-bottom: 4rem;
-  }
-
-  .sm\:block {
-    display: block;
   }
 
   .sm\:flex {

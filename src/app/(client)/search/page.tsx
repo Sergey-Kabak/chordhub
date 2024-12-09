@@ -13,7 +13,7 @@ export default async function SearchPage ({ searchParams }: { searchParams: Prom
     const { data: songs } = await supabase
       .from('songs')
       .select('*')
-      .like('name', `%${search}%`)
+      .ilike('name', `%${search}%`)
 
     return (
       <div className={'grid p-4'}>
