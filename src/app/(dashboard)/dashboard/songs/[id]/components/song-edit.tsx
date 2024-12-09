@@ -12,7 +12,7 @@ const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false }) ;
 
 export const SongEdit = ({ data }: { data: SongType} ) => {
   const editor = useRef(null);
-  const [content, setContent] = useState(data.tonalities);
+  const [content, setContent] = useState(data.content);
   const [currentPage, setCurrentPage] = useState(1);
 
   const config = useMemo(() => ({
@@ -66,7 +66,7 @@ export const SongEdit = ({ data }: { data: SongType} ) => {
         tonalities:
         <Pagination
           key={'flat'}
-          total={data.tonalities.length}
+          total={data.content.length}
           variant={'flat'}
           page={currentPage}
           onChange={setCurrentPage}
@@ -79,8 +79,7 @@ export const SongEdit = ({ data }: { data: SongType} ) => {
           ref={editor}
           value={content[currentPage - 1]}
           config={config}
-          onBlur={newContent => setContent((prev) => {
-            prev[currentPage - 1] = newContent
+          onBlur={() => setContent((prev) => {
             return prev
           })} // preferred to use only this option to update the content for performance reasons
           onChange={handleTextEditor}

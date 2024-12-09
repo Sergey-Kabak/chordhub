@@ -1,11 +1,12 @@
 'use client'
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Pagination } from "@nextui-org/react";
 import { List } from "@/app/(client)/components/list.tsx";
+import { SongType } from '@/types/song.ts'
 
-export const SongsList = ({ list, count }: { list: unknown[], count: number }) => {
+export const SongsList = ({ list, count }: { list: SongType[], count: number }) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -15,25 +16,22 @@ export const SongsList = ({ list, count }: { list: unknown[], count: number }) =
 
   const [currentPage, setCurrentPage] = useState(page || 1);
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(Array.from(searchParams.entries()));
-      params.set(name, value)
-      const search = params.toString();
-      const query = search ? `?${search}` : "";
-      router.push(`${pathname}${query}`);
-    },
-    [searchParams]
-  )
-
   useEffect(() => {
-    console.log(currentPage);
+    const createQueryString =
+      (name: string, value: string) => {
+        const params = new URLSearchParams(Array.from(searchParams.entries()));
+        params.set(name, value)
+        const search = params.toString();
+        const query = search ? `?${search}` : "";
+        router.push(`${pathname}${query}`);
+      }
+
     if (currentPage == 1) {
       router.push(pathname)
     } else {
       createQueryString('page', currentPage.toString())
     }
-  }, [currentPage])
+  }, [pathname, router, currentPage])
 
   return (
     <div>

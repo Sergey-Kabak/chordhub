@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { Card, CardHeader, CardBody, Image, Pagination, Button } from "@nextui-org/react";
 
 import NextLink from 'next/link';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { PerformerType } from "@/types/performer.ts";
 
-export const PerformersList = ({ list, count }: {list: Record<string, string>[], count: number}) => {
+export const PerformersList = ({ list, count }: {list: PerformerType[], count: number}) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -16,25 +17,22 @@ export const PerformersList = ({ list, count }: {list: Record<string, string>[],
 
   const [currentPage, setCurrentPage] = useState(page || 1);
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(Array.from(searchParams.entries()));
-      params.set(name, value)
-      const search = params.toString();
-      const query = search ? `?${search}` : "";
-      router.push(`${pathname}${query}`);
-    },
-    [searchParams]
-  )
-
   useEffect(() => {
-    console.log(currentPage);
+    const createQueryString =
+      (name: string, value: string) => {
+        const params = new URLSearchParams(Array.from(searchParams.entries()));
+        params.set(name, value)
+        const search = params.toString();
+        const query = search ? `?${search}` : "";
+        router.push(`${pathname}${query}`);
+      }
+
     if (currentPage == 1) {
       router.push(pathname)
     } else {
       createQueryString('page', currentPage.toString())
     }
-  }, [currentPage])
+  }, [router, pathname, currentPage])
 
   return (
     <div>
@@ -57,13 +55,13 @@ export const PerformersList = ({ list, count }: {list: Record<string, string>[],
         ))}
       </div>
       <div className={'mt-2'}></div>
-      <Pagination color="secondary" page={currentPage} total={Math.floor(count / 10)} onChange={setCurrentPage} />
+      <Pagination color="secondary" page={+currentPage} total={Math.floor(count / 10)} onChange={setCurrentPage} />
       <div className="flex gap-2">
         <Button
           color="secondary"
           size="sm"
           variant="flat"
-          onPress={() => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev))}
+          onPress={() => setCurrentPage((prev) => (prev as number > 1 ? prev as number - 1 : prev))}
         >
           Previous
         </Button>
@@ -71,7 +69,7 @@ export const PerformersList = ({ list, count }: {list: Record<string, string>[],
           color="secondary"
           size="sm"
           variant="flat"
-          onPress={() => setCurrentPage((prev) => (prev < 10 ? prev + 1 : prev))}
+          onPress={() => setCurrentPage((prev) => (prev as number < 10 ? prev as number + 1 : prev))}
         >
           Next
         </Button>

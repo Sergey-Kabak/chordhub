@@ -39,12 +39,12 @@ export const List = ({ data }: ListProps) => {
                 client
               </Link>
               <Divider orientation={'vertical'} className={'mx-4'} />
-              <Link
-                as={NextLink}
-                href={`/dashboard/songs/${song.id}`}
-              >
-                edit
-              </Link>
+              {/*<Link*/}
+              {/*  as={NextLink}*/}
+              {/*  href={`/dashboard/songs/${song.id}`}*/}
+              {/*>*/}
+              {/*  edit*/}
+              {/*</Link>*/}
             </CardFooter>
           </Card>
         ))

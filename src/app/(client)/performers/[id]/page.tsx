@@ -1,8 +1,8 @@
 'use server'
 
-import {currentDomain} from "@/app/utils/server";
 import { List } from '@/app/(client)/components/list.tsx'
 import { createClient } from "@/app/utils/supabase/server.ts";
+import { SongType } from "@/types/song.ts";
 
 export default async function songPage ({ params } : { params: Promise<{ id: string }> }) {
 
@@ -10,22 +10,20 @@ export default async function songPage ({ params } : { params: Promise<{ id: str
 
   const supabase = await createClient()
 
-  let { data: performer } = await supabase
+  const { data: performers } = await supabase
     .from('performers')
     .select('*')
     .eq('id', routeParams?.id)
 
-  let { data: songs } = await supabase
+  const { data: songs } = await supabase
     .from('songs')
     .select('*')
     .eq('performerId', routeParams?.id)
 
-  console.log(songs);
-
   return (
       <div className={'grid p-4'}>
-        {performer?.[0]?.name}
-          <List data={songs} />
+        {performers?.[0]?.name}
+          <List data={songs as SongType[]} />
       </div>
     )
 }

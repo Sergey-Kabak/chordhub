@@ -18,9 +18,9 @@ export const Header = () => {
                         <Link color="foreground" as={NextLink} href="/performers">Performers</Link>
                     </NavbarItem>
                     <Divider orientation="vertical" />
-                    <NavbarItem isActive={pathname === '/dashboard'}>
-                        <Link color="foreground" as={NextLink} href="/dashboard">Dashboard (for moderation)</Link>
-                    </NavbarItem>
+                    {/*<NavbarItem isActive={pathname === '/dashboard'}>*/}
+                    {/*    <Link color="foreground" as={NextLink} href="/dashboard">Dashboard (for moderation)</Link>*/}
+                    {/*</NavbarItem>*/}
                 </NavbarContent>
             </NavbarContent>
             <NavbarContent as="div" className="items-center" justify="end">
