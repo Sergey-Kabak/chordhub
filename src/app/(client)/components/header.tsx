@@ -11,14 +11,11 @@ export const Header = () => {
         <Navbar isBordered>
             <NavbarContent justify="start">
                 <NavbarBrand className="mr-4">
-                    <p className="hidden sm:block font-bold text-inherit">ChordHub</p>
+                    <Link color="foreground" as={NextLink} href="/">ChordHub</Link >
                 </NavbarBrand>
                 <NavbarContent as="div" className="sm:flex gap-3">
-                    <NavbarItem isActive={pathname === '/'}>
-                        <Link color="foreground" as={NextLink} href="/">Home</Link >
-                    </NavbarItem>
                     <NavbarItem isActive={pathname === '/list'}>
-                        <Link color="foreground" as={NextLink} href="/list">Songs</Link>
+                        <Link color="foreground" as={NextLink} href="/performers">Performers</Link>
                     </NavbarItem>
                     <Divider orientation="vertical" />
                     <NavbarItem isActive={pathname === '/dashboard'}>

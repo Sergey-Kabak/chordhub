@@ -10,7 +10,7 @@ type ListProps = {
 
 export const List = ({ data }: ListProps) => {
   return data ? (
-    <div className={'grid gap-2 max-w-[640px]'}>
+    <div className={'grid grid-cols-2 gap-2 max-w-[640px]'}>
       {
         data.map(song => (
           <Card key={song.id} className="max-w-[400px]">
@@ -24,7 +24,6 @@ export const List = ({ data }: ListProps) => {
               />
               <div className="flex flex-col">
                 <p className="text-md">{song.name}</p>
-                <p className="text-small text-default-500">{song.performer.name}</p>
               </div>
             </CardHeader>
             <Divider/>
@@ -35,7 +34,7 @@ export const List = ({ data }: ListProps) => {
             <CardFooter>
               <Link
                 as={NextLink}
-                href={`/list/${song.id}`}
+                href={`/songs/${song.id}`}
               >
                 client
               </Link>

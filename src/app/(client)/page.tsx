@@ -1,70 +1,24 @@
-'use client'
+'use server'
 
-import {Card, CardBody, CardFooter, Image} from "@nextui-org/react";
-import { Suspense } from 'react'
+import { createClient } from "@/app/utils/supabase/server.ts";
+import { SongsList } from '@/app/(client)/components/songs-list.tsx'
+export default async function App({ searchParams }: { searchParams: Record<string, unknown> }) {
+  const params = await searchParams
+  const page = params?.page || '1'
 
-export default function App() {
+  const supabase = await createClient()
 
-  const list = [
-    {
-      title: "Orange",
-      img: "https://nextui.org/images/fruit-1.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "https://nextui.org/images/fruit-2.jpeg",
-      price: "$3.00",
-    },
-    {
-      title: "Raspberry",
-      img: "https://nextui.org/images/fruit-3.jpeg",
-      price: "$10.00",
-    },
-    {
-      title: "Lemon",
-      img: "https://nextui.org/images/fruit-4.jpeg",
-      price: "$5.30",
-    },
-    {
-      title: "Avocado",
-      img: "https://nextui.org/images/fruit-5.jpeg",
-      price: "$15.70",
-    },
-    {
-      title: "Lemon 2",
-      img: "https://nextui.org/images/fruit-6.jpeg",
-      price: "$8.00",
-    }
-  ];
+  let { data, count, error } = await supabase
+    .from('songs')
+    .select('*', { count: 'exact', head: false })
+    .range((+page - 1) * 10, ((+page - 1) * 10) + 9)
 
   return (
     <div
       className="py-4 grid w-full h-auto items-center justify-center">
       <div className={'max-w-[1024px] px-6'}>
-        <h1 className={'mb-4'}>Categories</h1>
-        <Suspense>
-          <div className="mb-4 gap-2 grid grid-cols-6">
-            {list.map((item, index) => (
-              <Card shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")}>
-                <CardBody className="overflow-visible p-0">
-                  <Image
-                    shadow="sm"
-                    radius="lg"
-                    width="100%"
-                    alt={item.title}
-                    className="w-full object-cover h-[140px]"
-                    src={item.img}
-                  />
-                </CardBody>
-                <CardFooter className="text-small justify-between">
-                  <b>{item.title}</b>
-                  <p className="text-default-500">{item.price}</p>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        </Suspense>
+        <h1 className={'mb-4'}>Songs</h1>
+        <SongsList list={data} count={count} />
       </div>
     </div>
   );

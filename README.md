@@ -23,7 +23,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 ## Tailwind watch command
 
 ```bash
-npx tailwindcss -i ./src/app/globals.css -o ./src/app/output.css --watch
+npx tailwindcss -i ./src/app/input.css -o ./src/app/output.css --watch
 ```
 
 ## Learn More

@@ -1,22 +1,23 @@
 'use server'
 
 import { List } from '../components/list.tsx'
-import {currentDomain} from "@/app/utils/server";
+import { createClient } from "@/app/utils/supabase/server.ts";
 
 export default async function SearchPage ({ searchParams }: { searchParams: Promise<unknown> }) {
     const _searchParams = await searchParams
-    const domain = await currentDomain()
 
-    const data = await fetch(domain + '/api/search', {
-        method: 'POST',
-        body: JSON.stringify(_searchParams),
-    })
+    const search = _searchParams?.query
+    console.log(_searchParams);
+    const supabase = await createClient()
 
-    const result = await data.json()
+    let { data: songs } = await supabase
+      .from('songs')
+      .select('*')
+      .like('name', `%${search}%`)
 
     return (
       <div className={'grid p-4'}>
-        <List data={result?.data || []}/>
+        <List data={songs || []}/>
       </div>
     )
 }

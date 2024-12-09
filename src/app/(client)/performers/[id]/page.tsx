@@ -1,23 +1,31 @@
 'use server'
 
 import {currentDomain} from "@/app/utils/server";
-import { Tonalities } from "@/app/(client)/list/[id]/components/tonalities.tsx";
+import { List } from '@/app/(client)/components/list.tsx'
+import { createClient } from "@/app/utils/supabase/server.ts";
 
 export default async function songPage ({ params } : { params: Promise<{ id: string }> }) {
-    const domain = await currentDomain()
 
     const routeParams = await params;
 
-    const data = await fetch(domain + `/api/songs/${routeParams?.id}`, {
-        method: 'GET'
-    });
+  const supabase = await createClient()
 
-    const result = await data.json();
+  let { data: performer } = await supabase
+    .from('performers')
+    .select('*')
+    .eq('id', routeParams?.id)
 
+  let { data: songs } = await supabase
+    .from('songs')
+    .select('*')
+    .eq('performerId', routeParams?.id)
 
-    return (
+  console.log(songs);
+
+  return (
       <div className={'grid p-4'}>
-          <Tonalities content={result.data.content} />
+        {performer?.[0]?.name}
+          <List data={songs} />
       </div>
     )
 }
