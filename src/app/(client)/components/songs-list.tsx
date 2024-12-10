@@ -36,7 +36,8 @@ export const SongsList = ({ list, count }: { list: SongType[], count: number }) 
   return (
     <div>
       <List data={list || []}/>
-      <Pagination color="secondary" page={+currentPage} total={Math.floor(count / 10)} onChange={setCurrentPage} />
+      <div className={'p-4'}></div>
+      <Pagination color="secondary" page={+currentPage} total={Math.floor(count / 10)} onChange={setCurrentPage}/>
     </div>
   )
 }

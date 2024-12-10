@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Card, CardHeader, CardBody, Image, Pagination, Button } from "@nextui-org/react";
+import { Pagination, Button } from "@nextui-org/react";
 
-import NextLink from 'next/link';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PerformerType } from "@/types/performer.ts";
+import { PerformerCard } from "@/app/(client)/performers/components/performer-card.tsx";
 
 export const PerformersList = ({ list, count }: {list: PerformerType[], count: number}) => {
   const router = useRouter();
@@ -36,22 +36,9 @@ export const PerformersList = ({ list, count }: {list: PerformerType[], count: n
 
   return (
     <div>
-      <div className={'grid gap-4 grid-cols-[repeat(5,260px)] m-auto'}>
+      <div className={'grid gap-4 grid-cols-2'}>
         {list.map((item) => (
-          <Card key={item.id} className="py-4" as={NextLink} href={`/performers/${item.id}`}>
-            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-              {/*<p className="text-tiny uppercase font-bold">Daily Mix</p>*/}
-              <small className="font-bold text-sm">{item.name}</small>
-              {/*<small className="text-default-500">{item.count} Tracks</small>*/}
-            </CardHeader>
-            <CardBody className="overflow-visible py-2">
-              <Image
-                alt="Card background"
-                className="object-cover rounded-xl"
-                src={item.image}
-              />
-            </CardBody>
-          </Card>
+          <PerformerCard key={item.id} performer={item} />
         ))}
       </div>
       <div className={'mt-2'}></div>

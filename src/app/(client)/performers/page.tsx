@@ -14,11 +14,11 @@ export default async function PerformersPage ({ searchParams }: { searchParams: 
 
   const { data, count } = await supabase
     .from('performers')
-    .select('*', { count: 'exact', head: false })
+    .select('*, songs(count)', { count: 'exact', head: false })
     .range((+page - 1) * 10, ((+page - 1) * 10) + 9)
 
-    return (
-      <div className={'grid p-4'}>
+  return (
+      <div>
           <PerformersList list={data as PerformerType[]} count={count as number} />
       </div>
     )

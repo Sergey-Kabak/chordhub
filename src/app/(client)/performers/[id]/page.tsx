@@ -17,7 +17,9 @@ export default async function songPage ({ params } : { params: Promise<{ id: str
 
   const { data: songs } = await supabase
     .from('songs')
-    .select('*')
+    .select(`*,
+      performers (*)
+    `)
     .eq('performerId', routeParams?.id)
 
   return (

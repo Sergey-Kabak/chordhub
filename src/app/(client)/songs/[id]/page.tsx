@@ -11,12 +11,14 @@ export default async function SongPage ({ params } : { params: Promise<{ id: str
 
   const { data: songs } = await supabase
     .from('songs')
-    .select('*')
+    .select(`*,
+      performers (*, songs(count))
+    `)
     .eq('id', routeParams?.id)
 
   return (
     <div>
-      <Tonalities content={songs?.[0]?.content} />
+      <Tonalities song={songs?.[0]} />
     </div>
   )
 }
