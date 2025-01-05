@@ -791,6 +791,10 @@ body{
   top: 5%;
 }
 
+.top-\[80px\]{
+  top: 80px;
+}
+
 .top-\[calc\(100\%_\+_2px\)\]{
   top: calc(100% + 2px);
 }
@@ -861,22 +865,6 @@ body{
 
 .order-3{
   order: 3;
-}
-
-.col-span-1{
-  grid-column: span 1 / span 1;
-}
-
-.col-span-12{
-  grid-column: span 12 / span 12;
-}
-
-.col-span-2{
-  grid-column: span 2 / span 2;
-}
-
-.col-span-3{
-  grid-column: span 3 / span 3;
 }
 
 .col-span-5{
@@ -1440,10 +1428,6 @@ body{
   width: 3.5rem;
 }
 
-.w-15{
-  width: 3.75rem;
-}
-
 .w-16{
   width: 4rem;
 }
@@ -1658,10 +1642,6 @@ body{
 
 .max-w-5xl{
   max-width: 64rem;
-}
-
-.max-w-9{
-  max-width: 2.25rem;
 }
 
 .max-w-94{
@@ -2047,10 +2027,6 @@ body{
 
 .grid-cols-5{
   grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.grid-cols-6{
-  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .flex-row{
@@ -3209,16 +3185,6 @@ body{
   padding-bottom: 1rem;
 }
 
-.py-4\.5{
-  padding-top: 1.125rem;
-  padding-bottom: 1.125rem;
-}
-
-.py-5\.5{
-  padding-top: 1.375rem;
-  padding-bottom: 1.375rem;
-}
-
 .py-6{
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -3346,12 +3312,12 @@ body{
   padding-top: 0.5rem;
 }
 
-.pt-6{
-  padding-top: 1.5rem;
-}
-
 .pt-5\.5{
   padding-top: 1.375rem;
+}
+
+.pt-6{
+  padding-top: 1.5rem;
 }
 
 .text-left{
@@ -3440,11 +3406,6 @@ body{
   line-height: 30px;
 }
 
-.text-title-sm2{
-  font-size: 22px;
-  line-height: 28px;
-}
-
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -3469,14 +3430,6 @@ body{
 
 .font-semibold{
   font-weight: 600;
-}
-
-.font-black{
-  font-weight: 900;
-}
-
-.uppercase{
-  text-transform: uppercase;
 }
 
 .tabular-nums{
@@ -9180,11 +9133,6 @@ body {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-
-  .xsm\:text-base{
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
 }
 
 @media (min-width: 640px){
@@ -9246,18 +9194,6 @@ body {
 
   .sm\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .sm\:grid-cols-4{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .sm\:grid-cols-5{
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  .sm\:grid-cols-8{
-    grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
   .sm\:flex-row{
@@ -9364,10 +9300,6 @@ body {
     margin-left: 18.125rem;
   }
 
-  .lg\:mt-9{
-    margin-top: 2.25rem;
-  }
-
   .lg\:block{
     display: block;
   }
@@ -9391,11 +9323,6 @@ body {
     padding-right: 2rem;
   }
 
-  .lg\:py-6\.5{
-    padding-top: 1.625rem;
-    padding-bottom: 1.625rem;
-  }
-
   .lg\:pb-8{
     padding-bottom: 2rem;
   }
@@ -9417,10 +9344,6 @@ body {
 
   .xl\:col-span-3{
     grid-column: span 3 / span 3;
-  }
-
-  .xl\:col-span-7{
-    grid-column: span 7 / span 7;
   }
 
   .xl\:block{
@@ -9455,14 +9378,6 @@ body {
     padding: 4.375rem;
   }
 
-  .xl\:p-4{
-    padding: 1rem;
-  }
-
-  .xl\:p-5{
-    padding: 1.25rem;
-  }
-
   .xl\:p-9{
     padding: 2.25rem;
   }
@@ -9470,11 +9385,6 @@ body {
   .xl\:px-10{
     padding-left: 2.5rem;
     padding-right: 2.5rem;
-  }
-
-  .xl\:px-7\.5{
-    padding-left: 1.875rem;
-    padding-right: 1.875rem;
   }
 
   .xl\:pb-1{
@@ -9499,11 +9409,6 @@ body {
   .\32xl\:px-20{
     padding-left: 5rem;
     padding-right: 5rem;
-  }
-
-  .\32xl\:px-7\.5{
-    padding-left: 1.875rem;
-    padding-right: 1.875rem;
   }
 }
 
