@@ -2,11 +2,9 @@
 
 
 import { createClient } from "@/app/utils/supabase/server.ts";
-import { SongsList } from '@/app/(client)/components/songs-list.tsx'
-import { SongType } from "@/types/song.ts";
-import { CategoryBlock } from "@/app/(client)/components/category-block.tsx";
 import {Section} from "@/app/(client)/components/section";
-import {List} from "@/app/(client)/components/list.tsx";
+import List, { SongCard } from "@/app/(client)/components/list.tsx";
+import {SongType} from "@/types/song.ts";
 
 export default async function App({ searchParams }: { searchParams: Promise<{ page: unknown }> }) {
   const params = await searchParams
@@ -53,18 +51,22 @@ export default async function App({ searchParams }: { searchParams: Promise<{ pa
         [...mappedCategories.values()].map((value: {
           name: string,
           id: number,
-          songs: Record<string, any>[]
+          songs: SongType[]
         }) => {
           return (
               <Section key={value.id} title={value.name}>
-                <List data={value?.songs || []}/>
+                <List>
+                  {(value?.songs || []).map(song => <SongCard key={song.id} song={song} />)}
+                </List>
               </Section>
           )
         })
       }
 
       <Section title={'Songs'}>
-        <List data={data || []}/>
+        <List>
+          {(data || []).map(song => <SongCard key={song.id} song={song} />)}
+        </List>
       </Section>
     </div>
   );

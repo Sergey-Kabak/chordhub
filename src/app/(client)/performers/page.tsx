@@ -1,8 +1,8 @@
 'use server'
 
-import { PerformersList } from "@/app/(client)/performers/components/PerformersList.tsx";
 import { createClient } from "@/app/utils/supabase/server.ts";
-import { PerformerType } from "@/types/performer.ts";
+import List, { PerformerCard } from "@/app/(client)/components/list.tsx";
+import {Section} from "@/app/(client)/components/section";
 
 
 export default async function PerformersPage ({ searchParams }: { searchParams: Promise<{ page: unknown }> }) {
@@ -19,7 +19,12 @@ export default async function PerformersPage ({ searchParams }: { searchParams: 
 
   return (
       <div>
-          <PerformersList list={data as PerformerType[]} count={count as number} />
+          <Section title={'Performers'}>
+              <List showPagination={true} page={page as string} count={count as number}>
+                  {(data || []).map(performer => <PerformerCard key={performer.id} performer={performer} />)}
+              </List>
+          </Section>
+          {/*<PerformersList list={data as PerformerType[]} count={count as number} />*/}
       </div>
     )
 }

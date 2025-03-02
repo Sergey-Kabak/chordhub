@@ -1,12 +1,23 @@
-"use client";
+'use client';
 
-import React, { ReactNode } from "react";
-import Sidebar from "@/components/sidebar/sidebar.tsx";
-import { Header } from '@/components/layout/header.tsx';
-import {Accordion, AccordionItem, Link, Modal, ModalHeader, ModalContent, ModalBody, ModalFooter, Button, useDisclosure, Input, Kbd} from "@heroui/react";
-import NextLink from "next/link";
-import { usePathname } from "next/navigation";
-import { useHotkeys } from 'react-hotkeys-hook'
+import React, { ReactNode } from 'react';
+import Sidebar from '../sidebar/sidebar.tsx';
+import { Header } from './header.tsx';
+import {
+  Accordion,
+  AccordionItem,
+  Link,
+  Modal,
+  ModalHeader,
+  ModalContent,
+  ModalBody,
+  useDisclosure,
+  Input,
+  Kbd,
+} from '@heroui/react';
+import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 type Link = {
   title: string;
@@ -18,18 +29,24 @@ type Link = {
 };
 
 export default function DefaultLayout({
-  children, links, isDashboard = false,
+  children,
+  links,
+  isDashboard = false,
 }: {
   children: ReactNode;
   links: Link[];
-  isDashboard?: boolean
+  isDashboard?: boolean;
 }) {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const pathname = usePathname();
 
-  useHotkeys('Meta+k', () => {
-    onOpen()
-  }, [])
+  useHotkeys(
+    'Meta+k',
+    () => {
+      onOpen();
+    },
+    [],
+  );
 
   return (
     <>
@@ -92,15 +109,13 @@ export default function DefaultLayout({
             <>
               <ModalHeader className="py-0 px-0">
                 <Input
-                    size={'lg'}
-                    placeholder={'Search documentation'}
-                    classNames={{
-                      inputWrapper: 'rounded-b-none',
-                      input: 'font-thin'
-                    }}
-                    endContent={
-                      <Kbd>esc</Kbd>
-                    }
+                  size={'lg'}
+                  placeholder={'Search documentation'}
+                  classNames={{
+                    inputWrapper: 'rounded-b-none',
+                    input: 'font-thin',
+                  }}
+                  endContent={<Kbd>esc</Kbd>}
                   startContent={
                     <svg
                       aria-hidden="true"
@@ -131,9 +146,7 @@ export default function DefaultLayout({
                 />
               </ModalHeader>
               <ModalBody>
-                <div className={'py-12 text-center'}>
-                  No recent searches
-                </div>
+                <div className={'py-12 text-center'}>No recent searches</div>
               </ModalBody>
             </>
           )}

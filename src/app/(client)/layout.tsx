@@ -1,12 +1,6 @@
 'use client';
 
-import { Header } from '@/components/layout/header.tsx';
-import { Accordion, AccordionItem, Link } from '@heroui/react';
-
-import Sidebar from '@/components/sidebar/sidebar.tsx';
-import NextLink from 'next/link';
-import { usePathname } from 'next/navigation';
-import DefaultLayout from './components/Layouts/DefaultLayout.tsx'
+import DefaultLayout from '@/components/layout/default-layout.tsx'
 import React from "react";
 
 export default function RootLayout({
@@ -14,7 +8,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
 
   const links = [
     {
@@ -49,7 +42,7 @@ export default function RootLayout({
       pages: [
         {
           label: 'Songs',
-          link: '/',
+          link: '/songs',
         },
         {
           label: 'Performers',

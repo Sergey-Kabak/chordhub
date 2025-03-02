@@ -1,7 +1,5 @@
-import "@/app/(dashboard)/css/satoshi.css";
-// import Loader from "@/app/(dashboard)/components/common/Loader";
 import React, { ReactNode } from "react";
-import DefaultLayout from "@/app/(dashboard)/components/Layouts/DefaultLayout";
+import DefaultLayout from '@/components/layout/default-layout.tsx'
 
 export default async function RootLayout({
   children,
