@@ -3,6 +3,8 @@
 import { createClient } from "@/app/utils/supabase/server.ts";
 import Breadcrumb from "@/app/(dashboard)/components/Breadcrumbs/Breadcrumb.tsx";
 import { EditSong } from "@/app/(dashboard)/dashboard/songs/[id]/components/edit-song.tsx";
+import {PageBreadcrumbs} from "@/components/layout";
+import {Button} from "@heroui/react";
 
 export default async function SongPage ({ params } : { params: Promise<{ id: string }> }) {
   const _params = await params;
@@ -54,9 +56,24 @@ export default async function SongPage ({ params } : { params: Promise<{ id: str
         </div>
       </div>
     ) : (
-      <div>
-        <Breadcrumb pageName={song.name}/>
+      <>
+          <div className={'grid grid-cols-[1fr_auto] items-center mb-8'}>
+              <PageBreadcrumbs path={[
+                  {
+                      label: 'Songs',
+                      link: '/songs',
+                  },
+                  {
+                      label: song?.name,
+                      link: `/songs/${song?.id}`,
+                  }
+              ]} isDashboard={true} />
+              <div className={'flex gap-4'}>
+                  <Button size={'sm'} variant={'bordered'} radius={'full'} color={'primary'}>Save</Button>
+                  <Button size={'sm'} variant={'bordered'} radius={'full'} color={'danger'}>Delete</Button>
+              </div>
+          </div>
         <EditSong song={song} categories={categories as Record<string, unknown>[]}/>
-      </div>
+      </>
     )
 }

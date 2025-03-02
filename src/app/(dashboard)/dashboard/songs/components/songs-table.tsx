@@ -2,37 +2,30 @@
 
 import { useMemo } from 'react';
 import { Table } from "@/features/table";
-import { createFileRoute } from '@tanstack/react-router'
 import { useFilters } from '@/features/table/hooks/use-filters.tsx'
 import { sortByToState, stateToSortBy } from '@/features/table/utils/tableSortMapper'
-import { USER_COLUMNS } from '@/features/table/utils/userColumns'
+import { COLUMNS } from '../songs.utils.tsx'
 import { usePathname } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
-const DEFAULT_PAGE_INDEX = 0;
+const DEFAULT_PAGE_INDEX = 1;
 const DEFAULT_PAGE_SIZE = 10;
 
-export const SongsTable = ({ data } : { data: Record<string, never>[]}) => {
+export const SongsTable = ({ data, total } : { data: Record<string, never>[], total: number}) => {
 
-  const pathname = usePathname()
-  const { filters, resetFilters, setFilters } = useFilters(pathname)
-
-  console.log('filters:', filters);
-
-  // const { data } = useQuery({
-  //   queryKey: ['users', filters],
-  //   queryFn: () => fetchUsers(filters),
-  //   placeholderData: keepPreviousData,
-  // })
+  const router = useRouter();
+  const pathname = usePathname();
+  const { filters, setFilters } = useFilters(pathname)
 
   const paginationState = {
-    pageIndex: DEFAULT_PAGE_INDEX,
-    pageSize: DEFAULT_PAGE_SIZE,
+    pageIndex: +(filters?.pageIndex || DEFAULT_PAGE_INDEX),
+    pageSize: +(filters?.pageSize || DEFAULT_PAGE_SIZE),
   }
+
   const sortingState = sortByToState(filters.sortBy)
-  const columns = useMemo(() => USER_COLUMNS, [])
+  const columns = useMemo(() => COLUMNS(router), [])
 
-
-  return (
+    return (
     <Table
       data={data ?? []}
       columns={columns}
@@ -45,7 +38,7 @@ export const SongsTable = ({ data } : { data: Record<string, never>[]}) => {
               : pagination
           )
         },
-        rowCount: data?.rowCount,
+        rowCount: total,
       }}
       filters={filters}
       onFilterChange={filters => setFilters(filters)}

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroui/react": "^2.7.2",
     "@hookform/resolvers": "^3.9.1",
     "@nextui-org/autocomplete": "^2.1.7",
     "@nextui-org/avatar": "^2.0.33",
@@ -20,7 +21,7 @@
     "@supabase/supabase-js": "^2.47.3",
     "@tanstack/react-router": "^1.91.2",
     "@tanstack/react-table": "^8.20.6",
-    "framer-motion": "^11.11.17",
+    "framer-motion": "^11.18.2",
     "html-react-parser": "^5.2.0",
     "jodit-react": "^4.1.2",
     "lodash": "^4.17.21",
@@ -30,6 +31,7 @@
     "react-csv-reader": "^4.0.0",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.1",
+    "react-hotkeys-hook": "^4.6.1",
     "swr": "^2.2.5",
     "yup": "^1.5.0"
   },
@@ -40,6 +42,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
+    "prettier": "3.5.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

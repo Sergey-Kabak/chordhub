@@ -1,8 +1,9 @@
 'use client'
 
 import NextLink from "next/link";
-import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Image } from "@heroui/react";
 import { PerformerType } from "@/types/performer.ts";
+import NextImage from "next/image";
 
 export const PerformerCard = ({ performer } : { performer?: PerformerType }) => {
   return (

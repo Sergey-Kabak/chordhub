@@ -5,6 +5,8 @@ import { createClient } from "@/app/utils/supabase/server.ts";
 import { SongsList } from '@/app/(client)/components/songs-list.tsx'
 import { SongType } from "@/types/song.ts";
 import { CategoryBlock } from "@/app/(client)/components/category-block.tsx";
+import {Section} from "@/app/(client)/components/section";
+import {List} from "@/app/(client)/components/list.tsx";
 
 export default async function App({ searchParams }: { searchParams: Promise<{ page: unknown }> }) {
   const params = await searchParams
@@ -19,7 +21,7 @@ export default async function App({ searchParams }: { searchParams: Promise<{ pa
         name
       )
     `, { count: 'exact', head: false })
-    .range((+page - 1) * 10, ((+page - 1) * 10) + 9)
+    .range((+page - 1) * 12, ((+page - 1) * 12) + 11)
 
   const { data: categories } = await supabase
     .from('categories')
@@ -51,14 +53,19 @@ export default async function App({ searchParams }: { searchParams: Promise<{ pa
         [...mappedCategories.values()].map((value: {
           name: string,
           id: number,
-          songs: SongType[]
-        }) => (
-          <CategoryBlock key={value.id} data={value}/>
-        ))
+          songs: Record<string, any>[]
+        }) => {
+          return (
+              <Section key={value.id} title={value.name}>
+                <List data={value?.songs || []}/>
+              </Section>
+          )
+        })
       }
-      <div className={'p-6'}></div>
-      <h1 className={'mb-4'}>Songs</h1>
-      <SongsList list={data as SongType[]} count={count as number}/>
+
+      <Section title={'Songs'}>
+        <List data={data || []}/>
+      </Section>
     </div>
   );
 }

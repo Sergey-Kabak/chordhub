@@ -1,6 +1,6 @@
 'use client'
 
-import { Input, InputProps } from '@nextui-org/react';
+import { Input, InputProps } from '@heroui/react';
 import { useController } from 'react-hook-form';
 
 interface FormInputProps extends InputProps {

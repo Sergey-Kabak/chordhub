@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Pagination } from "@nextui-org/react";
+import { Pagination } from "@heroui/react";
 import { List } from "@/app/(client)/components/list.tsx";
 import { SongType } from '@/types/song.ts'
 
@@ -37,7 +37,9 @@ export const SongsList = ({ list, count }: { list: SongType[], count: number }) 
     <div>
       <List data={list || []}/>
       <div className={'p-4'}></div>
-      <Pagination color="secondary" page={+currentPage} total={Math.floor(count / 10)} onChange={setCurrentPage}/>
+      <Pagination
+          classNames={{ base: 'm-0'}} variant={'light'}
+          showControls page={+currentPage} total={Math.floor(count / 12)} onChange={setCurrentPage}/>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { Divider, Popover, PopoverTrigger, PopoverContent, Button } from "@nextui-org/react";
+import { Divider, Popover, PopoverTrigger, PopoverContent, Button } from "@heroui/react";
 import { SongType } from "@/types/song.ts";
 import { PerformerCard } from '@/app/(client)/performers/components/performer-card.tsx'
 import { ReactNode } from "react";

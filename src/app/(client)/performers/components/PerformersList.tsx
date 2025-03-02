@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pagination, Button } from "@nextui-org/react";
+import { Pagination, Button } from "@heroui/react";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PerformerType } from "@/types/performer.ts";
@@ -36,7 +36,7 @@ export const PerformersList = ({ list, count }: {list: PerformerType[], count: n
 
   return (
     <div>
-      <div className={'grid gap-4 grid-cols-2'}>
+      <div className={'block columns-4 [&>a]:mb-4'}>
         {list.map((item) => (
           <PerformerCard key={item.id} performer={item} />
         ))}
